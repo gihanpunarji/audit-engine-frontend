@@ -1,4 +1,9 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8081/api/v1';
+let RAW_BASE = import.meta.env.VITE_API_BASE;
+RAW_BASE = RAW_BASE.trim().replace(/\/+$/, '');
+if (!RAW_BASE.startsWith('http://') && !RAW_BASE.startsWith('https://')) {
+  RAW_BASE = `https://${RAW_BASE}`;
+}
+const API_BASE = RAW_BASE;
 
 function getAuthHeaders() {
   const token = localStorage.getItem('token');
