@@ -14,7 +14,7 @@ function getAuthHeaders() {
 
 // User Profile
 export async function fetchCurrentUser() {
-  const res = await fetch(`${API_BASE}/auth/me`, {
+  const res = await fetch(`${API_BASE}/me`, {
     headers: getAuthHeaders(),
   });
   if (!res.ok) throw new Error('Failed to fetch user profile');
