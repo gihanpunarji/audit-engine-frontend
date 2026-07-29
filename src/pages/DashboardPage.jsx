@@ -86,10 +86,11 @@ export default function DashboardPage() {
           console.log('Fetched targets:', fetchedTargets);
           setTargets(fetchedTargets);
 
-          // Load audits for first active target if exists
           if (fetchedTargets.length > 0) {
-            const firstAudits = await fetchAuditsByTarget(fetchedTargets[0].id);
-            setAudits(firstAudits);
+            const allAudits = await Promise.all(
+              fetchedTargets.map((t) => fetchAuditsByTarget(t.id))
+            );
+            setAudits(allAudits.flat());
           }
         }
       } catch (err) {
